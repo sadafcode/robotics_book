@@ -19,6 +19,7 @@ const config: Config = {
   projectName: 'robotics_book',
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
+  // Deployment trigger
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
