@@ -103,5 +103,3 @@ VectorXd compute_wbc_torques(RobotModel& robot, TaskList& tasks) {
 - unitree_sdk2: High-level Whole-Body Control Examples.
 
 ---
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
-Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>

@@ -107,5 +107,3 @@ print(f"Predicted Pos: {pos:.3f}, Vel: {vel:.3f}")
 - Unitree Robotics: H1/G1 Locomotion Algorithms (Unitree SDK 2.x).
 
 ---
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
-Co-Authored-By: Claude Sonnet 4.5 <noreply@anthreply.com>

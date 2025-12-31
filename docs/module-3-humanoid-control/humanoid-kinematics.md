@@ -135,5 +135,3 @@ def main(args=None):
 - Unitree G1/H1 Technical Manuals.
 
 ---
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
-Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
