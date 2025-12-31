@@ -1,0 +1,156 @@
+/**
+ * CSS modules are a great way to keep your components isolated.
+ * You can then import them into your components.
+ */
+
+.heroBanner {
+  padding: 4rem 0;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--ai-dark-navy);
+  color: var(--ai-soft-white);
+}
+
+.heroContent {
+  position: relative;
+}
+
+.heroImageContainer {
+  position: relative;
+  width: 100%;
+}
+
+.heroImage {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(0, 168, 255, 0.3);
+  display: block;
+}
+
+.heroOverlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+  max-width: 80%;
+  width: 100%;
+}
+
+.hero__title {
+  color: var(--ai-soft-white);
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  position: relative;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.hero__subtitle {
+  color: var(--ai-cyan);
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  position: relative;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.button--outline {
+  border: 2px solid var(--ai-cyan) !important;
+  color: var(--ai-cyan) !important;
+  background: transparent !important;
+}
+
+.button--outline:hover {
+  background-color: var(--ai-cyan) !important;
+  color: var(--ai-dark-navy) !important;
+  border-color: var(--ai-cyan) !important;
+}
+
+.featureCard {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 168, 255, 0.2);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  height: 100%;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.featureCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 168, 255, 0.3);
+  border-color: rgba(0, 212, 255, 0.5);
+  background: rgba(0, 168, 255, 0.1);
+}
+
+.featureCard h3 {
+  color: var(--ai-soft-white);
+  margin-bottom: 1rem;
+}
+
+.featureCard p {
+  color: var(--ai-cyan);
+  opacity: 0.9;
+}
+
+.featureCard span {
+  display: block;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.5));
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+
+  .heroImage {
+    max-width: 100%;
+  }
+
+  .featureCard {
+    margin-bottom: 1.5rem;
+  }
+
+  .featureCard:hover {
+    transform: none; /* Disable hover effect on mobile */
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.features {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  width: 100%;
+}
+
+.featureSvg {
+  height: 200px;
+  width: 200px;
+}

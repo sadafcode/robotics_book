@@ -1,0 +1,9 @@
+{
+  "label": "Module 1: ROS 2 Fundamentals",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Learn the fundamentals of ROS 2 (Robot Operating System), the industry-standard framework for building complex robot perception and control systems."
+  },
+  "collapsed": false
+}
