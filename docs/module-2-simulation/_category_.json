@@ -1,0 +1,9 @@
+{
+  "label": "Module 2: Simulation Environments",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Explore the critical role of physics-based simulation in Physical AI. Learn about URDF modeling, Gazebo, and high-fidelity environments like NVIDIA Isaac Sim to bridge the Sim-to-Real gap."
+  },
+  "collapsed": false
+}

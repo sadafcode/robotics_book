@@ -1,0 +1,279 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  /* Futuristic AI Theme Colors */
+  --ifm-color-primary: #00a8ff;          /* Electric Blue */
+  --ifm-color-primary-dark: #0097e6;     /* Darker Electric Blue */
+  --ifm-color-primary-darker: #0086c2;   /* Even Darker Electric Blue */
+  --ifm-color-primary-darkest: #006bb3;  /* Darkest Electric Blue */
+  --ifm-color-primary-light: #1abcff;     /* Light Electric Blue */
+  --ifm-color-primary-lighter: #34d1ff;  /* Lighter Electric Blue */
+  --ifm-color-primary-lightest: #4dd6ff; /* Lightest Electric Blue */
+
+  /* Additional AI-themed colors */
+  --ai-dark-navy: #0a0e2a;              /* Deep Navy/Dark Blue */
+  --ai-cyan: #00d4ff;                   /* Cyan/Teal */
+  --ai-neon-purple: #b967ff;            /* Neon Purple/Magenta */
+  --ai-soft-white: #e6f7ff;             /* Soft White/Ice Blue */
+  --ai-dark-bg: #0a0e2a;                /* Dark background */
+
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 168, 255, 0.1);
+}
+
+/* For readability purposes, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #00a8ff;          /* Electric Blue */
+  --ifm-color-primary-dark: #0097e6;     /* Darker Electric Blue */
+  --ifm-color-primary-darker: #0086c2;   /* Even Darker Electric Blue */
+  --ifm-color-primary-darkest: #006bb3;  /* Darkest Electric Blue */
+  --ifm-color-primary-light: #1abcff;     /* Light Electric Blue */
+  --ifm-color-primary-lighter: #34d1ff;  /* Lighter Electric Blue */
+  --ifm-color-primary-lightest: #4dd6ff; /* Lightest Electric Blue */
+  --docusaurus-highlighted-code-line-bg: rgba(0, 168, 255, 0.3);
+  /* Dark theme specific colors */
+  --ifm-background-color: var(--ai-dark-navy);
+  --ifm-font-color-base: var(--ai-soft-white);
+  --ifm-heading-color: var(--ai-soft-white);
+  --ifm-toc-border-color: var(--ai-cyan);
+}
+
+/* Light theme overrides */
+[data-theme='light'] {
+  --ifm-color-primary: #00a8ff;
+  --ifm-color-primary-dark: #0097e6;
+  --ifm-color-primary-darker: #0086c2;
+  --ifm-color-primary-darkest: #006bb3;
+  --ifm-color-primary-light: #1abcff;
+  --ifm-color-primary-lighter: #34d1ff;
+  --ifm-color-primary-lightest: #4dd6ff;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 168, 255, 0.1);
+  /* Light theme specific colors */
+  --ifm-background-color: #ffffff;
+  --ifm-font-color-base: #000000;
+  --ifm-heading-color: #000000;
+  --ifm-toc-border-color: #00a8ff;
+}
+
+/* Apply futuristic AI theme to various elements */
+html {
+  background-color: var(--ai-dark-navy) !important;
+}
+
+[data-theme='light'] {
+  background-color: #ffffff !important;
+}
+
+.hero.hero--primary {
+  background-color: var(--ai-dark-navy);
+  color: var(--ai-soft-white);
+}
+
+[data-theme='light'] .hero.hero--primary {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.hero__title {
+  color: var(--ai-soft-white);
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+[data-theme='light'] .hero__title {
+  color: #000000;
+  text-shadow:
+    -1px -1px 0 #fff,
+    1px -1px 0 #fff,
+    -1px 1px 0 #fff,
+    1px 1px 0 #fff;
+}
+
+.hero__subtitle {
+  color: var(--ai-cyan);
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+[data-theme='light'] .hero__subtitle {
+  color: #000000;
+  text-shadow:
+    -1px -1px 0 #fff,
+    1px -1px 0 #fff,
+    -1px 1px 0 #fff,
+    1px 1px 0 #fff;
+}
+
+.button--secondary {
+  background-color: transparent;
+  border: 2px solid var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
+
+.button--secondary:hover {
+  background-color: var(--ifm-color-primary);
+  color: white;
+}
+
+.navbar {
+  background-color: rgba(10, 14, 42, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+[data-theme='light'] .navbar {
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #000000;
+}
+
+.navbar__title {
+  color: var(--ai-soft-white);
+}
+
+[data-theme='light'] .navbar__title {
+  color: #000000;
+}
+
+.navbar__link {
+  color: var(--ai-cyan);
+}
+
+[data-theme='light'] .navbar__link {
+  color: #000000;
+}
+
+.menu__link--active {
+  color: var(--ifm-color-primary);
+}
+
+.table-of-contents__link:hover,
+.table-of-contents__link--active {
+  color: var(--ifm-color-primary);
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  color: var(--ai-soft-white);
+}
+
+[data-theme='light'] .markdown h1,
+[data-theme='light'] .markdown h2,
+[data-theme='light'] .markdown h3,
+[data-theme='light'] .markdown h4,
+[data-theme='light'] .markdown h5,
+[data-theme='light'] .markdown h6 {
+  color: #000000;
+}
+
+.markdown a {
+  color: var(--ifm-color-primary);
+}
+
+.markdown a:hover {
+  color: var(--ai-cyan);
+  text-decoration: underline;
+}
+
+.code-block {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-left: 3px solid var(--ifm-color-primary);
+}
+
+.admonition {
+  border: 1px solid var(--ifm-color-primary);
+}
+
+.admonition--note {
+  background-color: rgba(0, 168, 255, 0.1);
+}
+
+.admonition--tip {
+  background-color: rgba(0, 212, 255, 0.1);
+}
+
+.admonition--caution {
+  background-color: rgba(185, 103, 255, 0.1);
+}
+
+/* Override Mermaid default styles with high specificity */
+.mermaid {
+  --mermaid-text-color: #000000 !important;
+}
+
+.mermaid .node text,
+.mermaid .node .label,
+.mermaid .edgeLabel,
+.mermaid .edgeLabel .label,
+.mermaid .nodeLabel,
+.mermaid .edgeText,
+.mermaid .label,
+.mermaid g .label,
+.mermaid .cluster-label text,
+.mermaid .noteText {
+  fill: #000000 !important;
+  stroke: none !important;
+  color: #000000 !important;
+  font-weight: bold !important;
+  text-shadow: none !important;
+}
+
+/* Ensure all mermaid text is black in both themes */
+[data-theme='dark'] .mermaid .node text,
+[data-theme='dark'] .mermaid .node .label,
+[data-theme='dark'] .mermaid .edgeLabel,
+[data-theme='dark'] .mermaid .edgeLabel .label,
+[data-theme='dark'] .mermaid .nodeLabel,
+[data-theme='dark'] .mermaid .edgeText,
+[data-theme='dark'] .mermaid .label,
+[data-theme='dark'] .mermaid g .label,
+[data-theme='dark'] .mermaid .cluster-label text,
+[data-theme='dark'] .mermaid .noteText {
+  fill: #000000 !important;
+  color: #000000 !important;
+}
+
+[data-theme='light'] .mermaid .node text,
+[data-theme='light'] .mermaid .node .label,
+[data-theme='light'] .mermaid .edgeLabel,
+[data-theme='light'] .mermaid .edgeLabel .label,
+[data-theme='light'] .mermaid .nodeLabel,
+[data-theme='light'] .mermaid .edgeText,
+[data-theme='light'] .mermaid .label,
+[data-theme='light'] .mermaid g .label,
+[data-theme='light'] .mermaid .cluster-label text,
+[data-theme='light'] .mermaid .noteText {
+  fill: #000000 !important;
+  color: #000000 !important;
+}
+
+.mermaid .node rect,
+.mermaid .node circle,
+.mermaid .node ellipse,
+.mermaid .node polygon,
+.mermaid .node path {
+  stroke: var(--ifm-color-primary);
+  fill: rgba(0, 168, 255, 0.1);
+}
+
+[data-theme='light'] .mermaid .node rect,
+[data-theme='light'] .mermaid .node circle,
+[data-theme='light'] .mermaid .node ellipse,
+[data-theme='light'] .mermaid .node polygon,
+[data-theme='light'] .mermaid .node path {
+  stroke: var(--ifm-color-primary);
+  fill: rgba(0, 168, 255, 0.1);
+}

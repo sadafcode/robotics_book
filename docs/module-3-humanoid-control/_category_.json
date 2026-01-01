@@ -1,0 +1,9 @@
+{
+  "label": "Module 3: Humanoid Control",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Master the complexities of humanoid robot movement. Learn about kinematics, whole-body control, and bipedal locomotion algorithms that enable robots to balance and navigate the human world."
+  },
+  "collapsed": false
+}
