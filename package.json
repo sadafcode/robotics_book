@@ -43,7 +43,7 @@
     "react-dom": "^18.2.0",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
-    "stream-chat": "^8.60.0",
+    "stream-chat": "^9.27.2",
     "stream-chat-react": "^13.13.3"
   },
   "devDependencies": {
