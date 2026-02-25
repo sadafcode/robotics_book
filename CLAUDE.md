@@ -214,6 +214,38 @@ Wait for consent; never auto-create ADRs. Group related decisions (stacks, authe
 - **Diagrams**: Mermaid.js for architecture and flowcharts
 - **Search**: Algolia DocSearch (production), @easyops-cn/docusaurus-search-local (development)
 - **Languages**: JavaScript/TypeScript for configuration, Markdown for content
+- **Chat Widget**: `src/theme/ChatWidget.tsx` — floating RAG chatbot with selected-text context
+
+### RAG Chatbot Backend (`backend/`)
+- **Framework**: FastAPI (Python) with uvicorn
+- **AI**: OpenAI `text-embedding-3-small` for embeddings, `gpt-4o` for generation
+- **Vector DB**: Qdrant Cloud — cosine similarity search on book chunks
+- **Database**: Neon Postgres (async via SQLAlchemy + asyncpg) — chat session/message logging
+- **Config**: pydantic-settings loading from `.env`
+- **API**: `POST /api/v1/chat/completions` (message, selected_text, session_id) → (content, sources, session_id)
+- **Indexing**: `python -m scripts.index_book` — chunks 13 markdown docs → embeds → upserts to Qdrant
+
+#### Backend File Structure
+```
+backend/
+  main.py                  # FastAPI app, CORS, routes
+  config.py                # Env vars via pydantic-settings
+  requirements.txt         # Python dependencies
+  models/
+    database.py            # Async SQLAlchemy engine (Neon Postgres)
+    chat_log.py            # ChatSession, ChatMessage, MessageSource tables
+  services/
+    chunker.py             # Markdown → semantic chunks with metadata
+    embedder.py            # OpenAI text-embedding-3-small wrapper
+    retriever.py           # Qdrant vector search (cosine, top-5)
+    generator.py           # GPT-4o RAG response generation
+  scripts/
+    index_book.py          # One-shot: chunk all docs → embed → upsert to Qdrant
+```
+
+### Authentication (Feature: 003-auth-jwt)
+- **BetterAuth**: JWT-based auth with signup/login
+- **Auth Server**: `auth-server.js` on port 3001
 
 ### Deployment & CI/CD
 - **Hosting**: GitHub Pages (static site)
@@ -230,7 +262,18 @@ Wait for consent; never auto-create ADRs. Group related decisions (stacks, authe
 - **Version Control**: Git with conventional commits
 - **Package Manager**: npm/yarn for Node.js dependencies
 - **Testing**: Build validation, link checking, markdown linting
-- **Local Dev**: Hot reload on localhost:3000
+- **Local Dev**: Frontend on localhost:3000, Backend on localhost:8000
+
+### Environment Variables (`.env`)
+```
+BETTER_AUTH_SECRET=...
+BETTER_AUTH_URL=http://localhost:3001
+NEON_DATABASE_URL=postgresql://...
+DATABASE_URL=postgresql://...        # Used by RAG backend (asyncpg)
+OPENAI_API_KEY=sk-proj-...
+QDRANT_URL=https://...cloud.qdrant.io:6333
+QDRANT_API_KEY=...
+```
 
 ## Code Standards
 See `.specify/memory/constitution.md` for code quality, testing, performance, security, and architecture principles.

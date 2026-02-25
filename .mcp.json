@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "context7": {
+      "command": "C:\\Users\\User\\AppData\\Roaming\\npm\\context7-mcp.cmd",
+      "args": [],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "github": {
+      "command": "C:\\Users\\User\\AppData\\Roaming\\npm\\mcp-server-github.cmd",
+      "args": [],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+      }
+    }
+  }
+}

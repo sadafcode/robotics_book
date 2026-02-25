@@ -209,55 +209,36 @@ html {
   background-color: rgba(185, 103, 255, 0.1);
 }
 
-/* Override Mermaid default styles with high specificity */
-.mermaid {
-  --mermaid-text-color: #000000 !important;
-}
+/* ── Mermaid diagram text — black in all themes ──────────────────────────
+   Docusaurus renders Mermaid via dangerouslySetInnerHTML — the SVG gets
+   an id like "mermaid-svg-0", but NO ".mermaid" class on any parent.
+   All previous .mermaid selectors were never matching anything.
+   Fix: use [id^="mermaid"] to target the SVG directly.
+   ─────────────────────────────────────────────────────────────────────── */
 
-.mermaid .node text,
-.mermaid .node .label,
-.mermaid .edgeLabel,
-.mermaid .edgeLabel .label,
-.mermaid .nodeLabel,
-.mermaid .edgeText,
-.mermaid .label,
-.mermaid g .label,
-.mermaid .cluster-label text,
-.mermaid .noteText {
+/* SVG <text> / <tspan> — Mermaid v9 style */
+[id^="mermaid"] text,
+[id^="mermaid"] tspan {
   fill: #000000 !important;
   stroke: none !important;
-  color: #000000 !important;
-  font-weight: bold !important;
-  text-shadow: none !important;
 }
 
-/* Ensure all mermaid text is black in both themes */
-[data-theme='dark'] .mermaid .node text,
-[data-theme='dark'] .mermaid .node .label,
-[data-theme='dark'] .mermaid .edgeLabel,
-[data-theme='dark'] .mermaid .edgeLabel .label,
-[data-theme='dark'] .mermaid .nodeLabel,
-[data-theme='dark'] .mermaid .edgeText,
-[data-theme='dark'] .mermaid .label,
-[data-theme='dark'] .mermaid g .label,
-[data-theme='dark'] .mermaid .cluster-label text,
-[data-theme='dark'] .mermaid .noteText {
-  fill: #000000 !important;
+/* HTML inside <foreignObject> — Mermaid v10 node/edge labels */
+[id^="mermaid"] foreignObject span,
+[id^="mermaid"] foreignObject p,
+[id^="mermaid"] foreignObject div,
+[id^="mermaid"] foreignObject label {
   color: #000000 !important;
 }
 
-[data-theme='light'] .mermaid .node text,
-[data-theme='light'] .mermaid .node .label,
-[data-theme='light'] .mermaid .edgeLabel,
-[data-theme='light'] .mermaid .edgeLabel .label,
-[data-theme='light'] .mermaid .nodeLabel,
-[data-theme='light'] .mermaid .edgeText,
-[data-theme='light'] .mermaid .label,
-[data-theme='light'] .mermaid g .label,
-[data-theme='light'] .mermaid .cluster-label text,
-[data-theme='light'] .mermaid .noteText {
-  fill: #000000 !important;
+/* Named label classes (both versions) */
+[id^="mermaid"] .nodeLabel,
+[id^="mermaid"] .edgeLabel,
+[id^="mermaid"] .edgeLabel span,
+[id^="mermaid"] .cluster-label,
+[id^="mermaid"] .label {
   color: #000000 !important;
+  fill: #000000 !important;
 }
 
 .mermaid .node rect,
@@ -276,4 +257,1006 @@ html {
 [data-theme='light'] .mermaid .node path {
   stroke: var(--ifm-color-primary);
   fill: rgba(0, 168, 255, 0.1);
+}
+
+/* ========================================
+   Auth Form Styles - Matching AI Theme
+   ======================================== */
+
+.auth-form {
+  color: var(--ai-soft-white);
+}
+
+.auth-form h2 {
+  color: var(--ai-cyan);
+  margin-bottom: 8px;
+  font-size: 1.5rem;
+}
+
+.auth-form h3 {
+  color: var(--ai-cyan);
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-size: 1.1rem;
+  border-bottom: 1px solid var(--ai-cyan);
+  padding-bottom: 8px;
+}
+
+.auth-form p {
+  color: var(--ai-soft-white);
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+
+.auth-form .form-section {
+  margin-bottom: 24px;
+}
+
+.auth-form .form-group {
+  margin-bottom: 16px;
+}
+
+.auth-form label {
+  display: block;
+  color: var(--ai-soft-white);
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.auth-form input,
+.auth-form select,
+.auth-form textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background: #1a1e3a;
+  border: 1px solid var(--ifm-color-primary);
+  border-radius: 8px;
+  color: var(--ai-soft-white);
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.auth-form input:focus,
+.auth-form select:focus,
+.auth-form textarea:focus {
+  outline: none;
+  border-color: var(--ai-cyan);
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
+}
+
+.auth-form input::placeholder {
+  color: rgba(230, 247, 255, 0.4);
+}
+
+.auth-form select option {
+  background: #1a1e3a;
+  color: var(--ai-soft-white);
+}
+
+.auth-form button[type="submit"] {
+  width: 100%;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #00a8ff 0%, #0097e6 100%);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 16px;
+}
+
+.auth-form button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 168, 255, 0.4);
+}
+
+.auth-form button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.auth-form .error-message {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid #ef4444;
+  color: #ff6b6b;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.auth-form .auth-switch {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 168, 255, 0.3);
+}
+
+.auth-form .auth-switch a {
+  color: var(--ai-cyan);
+  text-decoration: none;
+}
+
+.auth-form .auth-switch a:hover {
+  text-decoration: underline;
+}
+
+/* Tag list for arrays (languages, frameworks, etc.) */
+.auth-form .input-with-button {
+  display: flex;
+  gap: 8px;
+}
+
+.auth-form .input-with-button input {
+  flex: 1;
+}
+
+.auth-form .input-with-button button {
+  padding: 12px 20px;
+  background: var(--ifm-color-primary);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.auth-form .input-with-button button:hover {
+  background: var(--ifm-color-primary-dark);
+}
+
+.auth-form .tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.auth-form .tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 168, 255, 0.2);
+  border: 1px solid var(--ifm-color-primary);
+  color: var(--ai-cyan);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.auth-form .tag button {
+  background: none;
+  border: none;
+  color: var(--ai-cyan);
+  cursor: pointer;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.auth-form .tag button:hover {
+  color: #ff6b6b;
+}
+
+/* Personalization styles */
+.personalization-container {
+  margin: 20px 0;
+}
+
+.personalization-button {
+  background: linear-gradient(135deg, #b967ff 0%, #8b5cf6 100%);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.personalization-panel {
+  background: #1a1e3a;
+  border: 1px solid var(--ai-neon-purple);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 12px;
+}
+
+.personalization-panel h3 {
+  color: var(--ai-neon-purple);
+  margin-top: 0;
+}
+
+.level-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.level-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(185, 103, 255, 0.1);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.level-option:hover {
+  border-color: var(--ai-neon-purple);
+}
+
+.level-option input[type="radio"] {
+  width: auto;
+  margin-top: 4px;
+}
+
+.level-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.level-info strong {
+  color: var(--ai-soft-white);
+}
+
+.level-info span {
+  color: rgba(230, 247, 255, 0.7);
+  font-size: 13px;
+}
+
+.button-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.save-button {
+  flex: 1;
+  background: linear-gradient(135deg, #b967ff 0%, #8b5cf6 100%);
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cancel-button {
+  padding: 12px 24px;
+  background: transparent;
+  border: 1px solid rgba(185, 103, 255, 0.5);
+  border-radius: 8px;
+  color: var(--ai-soft-white);
+  cursor: pointer;
+}
+
+.personalization-prompt {
+  background: rgba(185, 103, 255, 0.1);
+  border: 1px dashed var(--ai-neon-purple);
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  color: var(--ai-soft-white);
+}
+
+.personalization-message {
+  color: var(--ai-cyan);
+  font-size: 13px;
+  margin: 8px 0 0;
+}
+
+.personalization-override-badge {
+  font-size: 11px;
+  opacity: 0.8;
+  font-weight: normal;
+}
+
+/* ========================================
+   Personalization Level Badges
+   ======================================== */
+
+:root {
+  --level-non-technical: #22c55e;   /* green */
+  --level-beginner: #3b82f6;        /* blue */
+  --level-intermediate: #f97316;    /* orange */
+  --level-professional: #a855f7;    /* purple */
+}
+
+.personalization-level-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.personalization-level-badge--md {
+  padding: 4px 14px;
+  font-size: 13px;
+}
+
+.personalization-level-badge--sm {
+  padding: 2px 8px;
+  font-size: 11px;
+}
+
+.badge--non-technical {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid var(--level-non-technical);
+  color: var(--level-non-technical);
+}
+
+.badge--beginner {
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid var(--level-beginner);
+  color: var(--level-beginner);
+}
+
+.badge--intermediate {
+  background: rgba(249, 115, 22, 0.15);
+  border: 1px solid var(--level-intermediate);
+  color: var(--level-intermediate);
+}
+
+.badge--professional {
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid var(--level-professional);
+  color: var(--level-professional);
+}
+
+/* Level badge in questionnaire result */
+.level-badge {
+  display: inline-block;
+  padding: 10px 28px;
+  border-radius: 30px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 16px 0;
+}
+
+.level-badge--non_technical { background: rgba(34,197,94,0.2); border: 2px solid var(--level-non-technical); color: var(--level-non-technical); }
+.level-badge--beginner { background: rgba(59,130,246,0.2); border: 2px solid var(--level-beginner); color: var(--level-beginner); }
+.level-badge--intermediate { background: rgba(249,115,22,0.2); border: 2px solid var(--level-intermediate); color: var(--level-intermediate); }
+.level-badge--professional { background: rgba(168,85,247,0.2); border: 2px solid var(--level-professional); color: var(--level-professional); }
+
+/* ========================================
+   Personalization Bar (DocItem injected)
+   ======================================== */
+
+.personalization-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 16px;
+  background: rgba(185, 103, 255, 0.07);
+  border-bottom: 1px solid rgba(185, 103, 255, 0.2);
+  border-radius: 0 0 8px 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.personalization-bar--unauthenticated,
+.personalization-bar--no-profile {
+  justify-content: center;
+  font-size: 13px;
+  padding: 6px 16px;
+}
+
+.personalization-bar__left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.personalization-bar__label {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.personalization-bar__right .personalization-button {
+  padding: 6px 14px;
+  font-size: 12px;
+}
+
+.personalization-bar__prompt a {
+  color: var(--ai-cyan);
+}
+
+/* ========================================
+   Content Section Adaptive Styling
+   ======================================== */
+
+.content-section {
+  border-left: 3px solid transparent;
+  padding-left: 12px;
+  margin: 16px 0;
+}
+
+.content-section--beginner {
+  border-color: var(--level-beginner);
+  background: rgba(59, 130, 246, 0.05);
+  border-radius: 0 6px 6px 0;
+  padding: 12px 16px;
+}
+
+.content-section--intermediate {
+  border-color: var(--level-intermediate);
+  background: rgba(249, 115, 22, 0.05);
+  border-radius: 0 6px 6px 0;
+  padding: 12px 16px;
+}
+
+.content-section--professional {
+  border-color: var(--level-professional);
+  background: rgba(168, 85, 247, 0.05);
+  border-radius: 0 6px 6px 0;
+  padding: 12px 16px;
+}
+
+.content-section--all {
+  border-color: rgba(255,255,255,0.2);
+  padding: 8px 12px;
+}
+
+/* CSS fallback: body[data-user-level] attribute */
+body[data-user-level="non_technical"] .content-section--intermediate,
+body[data-user-level="non_technical"] .content-section--professional {
+  display: none;
+}
+
+body[data-user-level="beginner"] .content-section--intermediate,
+body[data-user-level="beginner"] .content-section--professional {
+  display: none;
+}
+
+body[data-user-level="intermediate"] .content-section--professional {
+  display: none;
+}
+
+/* ========================================
+   Questionnaire Styles
+   ======================================== */
+
+.questionnaire-container {
+  background: #1a1e3a;
+  border: 1px solid var(--ai-neon-purple);
+  border-radius: 16px;
+  padding: 32px;
+}
+
+.questionnaire-header {
+  margin-bottom: 24px;
+}
+
+.questionnaire-progress-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.questionnaire-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--level-beginner), var(--ai-neon-purple));
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.questionnaire-step-indicator {
+  font-size: 13px;
+  opacity: 0.6;
+}
+
+.questionnaire-question {
+  color: var(--ai-soft-white);
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+
+.questionnaire-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.questionnaire-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(185, 103, 255, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  color: var(--ai-soft-white);
+}
+
+.questionnaire-option:hover {
+  border-color: var(--ai-neon-purple);
+  background: rgba(185, 103, 255, 0.1);
+}
+
+.questionnaire-option.selected {
+  border-color: var(--ai-neon-purple);
+  background: rgba(185, 103, 255, 0.15);
+}
+
+.questionnaire-option input[type="radio"] {
+  width: auto;
+  accent-color: var(--ai-neon-purple);
+}
+
+.questionnaire-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.questionnaire-result {
+  text-align: center;
+  padding: 32px;
+  background: #1a1e3a;
+  border: 1px solid var(--ai-neon-purple);
+  border-radius: 16px;
+}
+
+.result-description {
+  opacity: 0.8;
+  margin: 12px 0 24px;
+}
+
+.result-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.questionnaire-error-inline {
+  color: #ff6b6b;
+  font-size: 13px;
+  margin-top: 12px;
+  text-align: center;
+}
+
+.questionnaire-loading,
+.questionnaire-error {
+  text-align: center;
+  padding: 32px;
+  opacity: 0.7;
+}
+
+/* Demo page */
+.demo-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(0, 168, 255, 0.08);
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.demo-no-level {
+  opacity: 0.7;
+  font-size: 13px;
+}
+
+/* ========================================
+   Learning Path Styles
+   ======================================== */
+
+.learning-path__header {
+  margin-bottom: 24px;
+}
+
+.learning-path__subtitle {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.learning-path__timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+.learning-path__timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--level-beginner), var(--ai-neon-purple));
+  opacity: 0.3;
+}
+
+.learning-path__item {
+  display: flex;
+  gap: 20px;
+  padding: 16px 0;
+  position: relative;
+}
+
+.learning-path__item--recommended {
+  background: rgba(185, 103, 255, 0.05);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 0 -16px;
+}
+
+.learning-path__item-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #1a1e3a;
+  border: 2px solid var(--ai-neon-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ai-neon-purple);
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.learning-path__item--recommended .learning-path__item-number {
+  background: var(--ai-neon-purple);
+  color: white;
+}
+
+.learning-path__item-content {
+  flex: 1;
+  padding-top: 8px;
+}
+
+.learning-path__item-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.learning-path__item-title {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.learning-path__recommended-badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  background: rgba(185, 103, 255, 0.2);
+  border: 1px solid var(--ai-neon-purple);
+  border-radius: 10px;
+  color: var(--ai-neon-purple);
+}
+
+.learning-path__level-tag {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  opacity: 0.8;
+}
+
+.level-tag--non_technical { background: rgba(34,197,94,0.15); color: var(--level-non-technical); }
+.level-tag--beginner { background: rgba(59,130,246,0.15); color: var(--level-beginner); }
+.level-tag--intermediate { background: rgba(249,115,22,0.15); color: var(--level-intermediate); }
+.level-tag--professional { background: rgba(168,85,247,0.15); color: var(--level-professional); }
+
+.learning-path__item-description {
+  font-size: 14px;
+  opacity: 0.75;
+  margin: 0;
+}
+
+.learning-path-cta {
+  padding: 24px;
+  background: rgba(185, 103, 255, 0.08);
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* ========================================
+   Hardware Recommendations Styles
+   ======================================== */
+
+.recommendations__intro {
+  margin-bottom: 24px;
+}
+
+.recommendations__summary {
+  font-size: 1.05rem;
+  opacity: 0.85;
+  margin-bottom: 8px;
+}
+
+.recommendations__level-note {
+  font-size: 13px;
+  opacity: 0.65;
+}
+
+.recommendations__section {
+  margin-bottom: 32px;
+}
+
+.recommendations__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.recommendation-card {
+  background: #1a1e3a;
+  border: 1px solid rgba(0, 168, 255, 0.2);
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.recommendation-card--hardware {
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.recommendation-card--software {
+  border-color: rgba(168, 85, 247, 0.3);
+}
+
+.recommendation-card__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.recommendation-card__name {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--ai-soft-white);
+}
+
+.recommendation-card__description {
+  font-size: 13px;
+  opacity: 0.75;
+  flex: 1;
+  margin: 0;
+}
+
+.recommendation-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.recommendation-card__price {
+  font-size: 13px;
+  color: var(--ai-cyan);
+  font-weight: 600;
+}
+
+.recommendation-card__link {
+  font-size: 12px !important;
+  padding: 4px 12px !important;
+}
+
+.recommendation-card__free-badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid var(--level-non-technical);
+  border-radius: 10px;
+  color: var(--level-non-technical);
+}
+
+.recommendations-cta {
+  padding: 24px;
+  background: rgba(185, 103, 255, 0.08);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.error-text {
+  color: #ff6b6b;
+}
+
+/* ========================================
+   Urdu Translation Styles
+   ======================================== */
+
+.translation-wrapper {
+  position: relative;
+}
+
+.translation-wrapper__header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 8px 0;
+}
+
+.translation-wrapper--urdu {
+  /* Additional styling for Urdu mode */
+}
+
+/* Force all Mermaid diagram text to black in translated view.
+   Covers both old SVG <text> elements and Mermaid v10 <foreignObject> HTML labels. */
+.translation-wrapper--urdu svg text,
+.translation-wrapper--urdu svg tspan,
+.translation-wrapper--urdu svg foreignObject p,
+.translation-wrapper--urdu svg foreignObject div,
+.translation-wrapper--urdu svg foreignObject span,
+.translation-wrapper--urdu svg foreignObject .nodeLabel,
+.translation-wrapper--urdu svg foreignObject .edgeLabel,
+.translation-wrapper--urdu [class*="mermaid"] text,
+.translation-wrapper--urdu [class*="mermaid"] tspan,
+.translation-wrapper--urdu [class*="mermaid"] foreignObject p,
+.translation-wrapper--urdu [class*="mermaid"] foreignObject div,
+.translation-wrapper--urdu [id*="mermaid"] foreignObject p,
+.translation-wrapper--urdu [id*="mermaid"] foreignObject div {
+  fill: #1c1e21 !important;
+  color: #1c1e21 !important;
+  stroke: none !important;
+}
+
+.translation-wrapper--loading {
+  opacity: 0.8;
+}
+
+.translation-wrapper__overlay {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(10, 14, 42, 0.9);
+  border-radius: 8px;
+  z-index: 100;
+}
+
+.translation-wrapper__loading-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ai-cyan);
+  font-size: 14px;
+}
+
+/* Urdu Translation Button */
+.urdu-translation-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #00a8ff 0%, #0097e6 100%);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.urdu-translation-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 168, 255, 0.4);
+}
+
+.urdu-translation-button:active {
+  transform: translateY(0);
+}
+
+.urdu-translation-button:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.urdu-translation-button--active {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+}
+
+.urdu-translation-button--loading {
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+}
+
+.urdu-translation-button__icon {
+  font-size: 16px;
+}
+
+.urdu-translation-button__text {
+  font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif;
+}
+
+.urdu-translation-button__spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+/* RTL Support for Urdu Content */
+[dir="rtl"] .markdown {
+  text-align: right;
+}
+
+[dir="rtl"] .markdown h1,
+[dir="rtl"] .markdown h2,
+[dir="rtl"] .markdown h3,
+[dir="rtl"] .markdown h4,
+[dir="rtl"] .markdown h5,
+[dir="rtl"] .markdown h6 {
+  text-align: right;
+}
+
+[dir="rtl"] .markdown ul,
+[dir="rtl"] .markdown ol {
+  padding-right: 1.5em;
+  padding-left: 0;
+}
+
+[dir="rtl"] .markdown li {
+  text-align: right;
+}
+
+[dir="rtl"] .admonition {
+  border-right: 4px solid var(--ifm-color-primary);
+  border-left: none;
+}
+
+/* Urdu Font Support */
+@font-face {
+  font-family: 'Noto Nastaliq Urdu';
+  src: url('https://fonts.gstatic.com/s/notonastaliqurdu/v17/LhWgPqN68NIhkfTqaLGp-ghyQ9qbcqm_9KKEiE2M.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.urdu-font {
+  font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Urdu Typesetting', serif;
+  line-height: 2;
+  font-size: 1.1em;
+}
+
+/* Translation Loading Spinner */
+.translation-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
