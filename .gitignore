@@ -31,3 +31,17 @@ yarn-error.log*
 .vscode
 *.swp
 *.swo
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Windows artifacts
+nul
+
+# Claude settings
+.claude/settings.local.json
+
+# Build artifacts in docs
+docs/**/*.html
