@@ -76,7 +76,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ onClose }) => {
     setError(null);
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/v1/chat/completions', {
+      const response = await fetch('https://physical-ai-backend.onrender.com/api/v1/chat/completions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

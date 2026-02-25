@@ -1,11 +1,8 @@
 /**
- * Translation Service for Urdu translations
- * Uses backend API with Argos Translate (free & offline)
+ * Translation Service for Urdu translations via OpenAI GPT-4o-mini
  */
 
-// Hardcoded backend URL - for production, use environment variables at build time
-// or configure via docusaurus.config.ts customFields
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = 'https://physical-ai-backend.onrender.com';
 
 export interface TranslationRequest {
   text: string;

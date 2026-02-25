@@ -1,6 +1,4 @@
-// Must use localhost (not 127.0.0.1) so the browser sends the auth cookie
-// which BetterAuth scopes to the `localhost` domain.
-const BASE = 'http://localhost:8000/api/v1/personalization';
+const BASE = 'https://physical-ai-backend.onrender.com/api/v1/personalization';
 
 function headers(userId?: string): HeadersInit {
   const h: HeadersInit = { 'Content-Type': 'application/json' };
