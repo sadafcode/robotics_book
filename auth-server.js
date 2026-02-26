@@ -1,9 +1,10 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-const { Pool } = require("pg");
-const { betterAuth } = require("better-auth");
-const { toNodeHandler } = require("better-auth/node");
+import "dotenv/config";
+import express from "express";
+import cors from "cors";
+import pkg from "pg";
+const { Pool } = pkg;
+import { betterAuth } from "better-auth";
+import { toNodeHandler } from "better-auth/node";
 
 const pool = new Pool({ connectionString: process.env.NEON_DATABASE_URL });
 
@@ -46,11 +47,13 @@ app.get("/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
-if (require.main === module) {
+// For local development
+if (process.env.NODE_ENV !== "production") {
+  const port = process.env.PORT || 3001;
   app.listen(port, () => {
     console.log(`Auth server running on http://localhost:${port}`);
     console.log(`Health check: http://localhost:${port}/health`);
   });
 }
 
-module.exports = app;
+export default app;

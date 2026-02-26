@@ -4,7 +4,10 @@
   "builds": [
     {
       "src": "auth-server.js",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "maxDuration": 10
+      }
     }
   ],
   "routes": [
@@ -12,5 +15,8 @@
       "src": "/(.*)",
       "dest": "auth-server.js"
     }
-  ]
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
 }

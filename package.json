@@ -12,6 +12,7 @@
   ],
   "author": "Physical AI Project",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
