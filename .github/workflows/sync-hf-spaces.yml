@@ -19,5 +19,15 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git remote add space https://Sadafawad:$HF_TOKEN@huggingface.co/spaces/Sadafawad/physical-ai-backend
-          git push space HEAD:main --force
+          # Copy only backend files to a clean deploy directory
+          mkdir hf-deploy
+          cp -r backend/* hf-deploy/
+          cp README.md hf-deploy/
+
+          cd hf-deploy
+          git init
+          git config user.email "github-actions@github.com"
+          git config user.name "GitHub Actions"
+          git add .
+          git commit -m "Deploy backend to HuggingFace Spaces"
+          git push https://Sadafawad:$HF_TOKEN@huggingface.co/spaces/Sadafawad/physical-ai-backend main --force
