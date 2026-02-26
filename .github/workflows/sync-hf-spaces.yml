@@ -15,19 +15,31 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Push to HuggingFace Spaces
+      - name: Install huggingface_hub
+        run: pip install huggingface_hub
+
+      - name: Upload backend to HuggingFace Spaces
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          # Copy only backend files to a clean deploy directory
-          mkdir hf-deploy
-          cp -r backend/* hf-deploy/
-          cp README.md hf-deploy/
+          python - <<'EOF'
+          import os
+          from huggingface_hub import HfApi
 
-          cd hf-deploy
-          git init
-          git config user.email "github-actions@github.com"
-          git config user.name "GitHub Actions"
-          git add .
-          git commit -m "Deploy backend to HuggingFace Spaces"
-          git push https://Sadafawad:$HF_TOKEN@huggingface.co/spaces/Sadafawad/physical-ai-backend main --force
+          api = HfApi(token=os.environ["HF_TOKEN"])
+
+          api.upload_folder(
+              folder_path="backend",
+              repo_id="Sadafawad/physical-ai-backend",
+              repo_type="space",
+          )
+
+          api.upload_file(
+              path_or_fileobj="README.md",
+              path_in_repo="README.md",
+              repo_id="Sadafawad/physical-ai-backend",
+              repo_type="space",
+          )
+
+          print("Upload complete!")
+          EOF
