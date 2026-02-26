@@ -8,6 +8,10 @@ interface Message {
   timestamp: Date;
 }
 
+const BACKEND_URL = typeof window !== "undefined" && window.location.hostname === "localhost"
+  ? "http://localhost:8000"
+  : "https://physical-ai-backend.onrender.com";
+
 const RAGChatWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedText, setSelectedText] = useState<string>('');
@@ -67,7 +71,7 @@ const RAGChatWidget: React.FC = () => {
 
     try {
       // Call the backend API
-      const response = await fetch('http://localhost:8001/api/v1/chat/completions', {
+      const response = await fetch(`${BACKEND_URL}/api/v1/chat/completions`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

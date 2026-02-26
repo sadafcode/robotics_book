@@ -16,3 +16,18 @@ services:
         sync: false
       - key: PYTHON_VERSION
         value: 3.11.0
+
+  - type: web
+    name: physical-ai-auth-server
+    runtime: node
+    buildCommand: npm install
+    startCommand: node auth-server.js
+    envVars:
+      - key: NEON_DATABASE_URL
+        sync: false
+      - key: BETTER_AUTH_SECRET
+        sync: false
+      - key: BETTER_AUTH_URL
+        sync: false
+      - key: NODE_VERSION
+        value: 20.0.0
