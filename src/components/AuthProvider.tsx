@@ -12,14 +12,17 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const { data: session, isPending } = authClient.useSession();
+  // Only run useSession on client-side
+  const session = typeof window !== 'undefined' && authClient?.useSession
+    ? authClient.useSession()
+    : { data: null, isPending: false };
 
   const value: AuthContextType = {
-    user: session?.user ?? null,
-    isLoading: isPending,
-    signIn: authClient.signIn,
-    signUp: authClient.signUp,
-    signOut: authClient.signOut,
+    user: session?.data?.user ?? null,
+    isLoading: session?.isPending ?? false,
+    signIn: authClient?.signIn,
+    signUp: authClient?.signUp,
+    signOut: authClient?.signOut,
   };
 
   return (
