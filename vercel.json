@@ -3,7 +3,7 @@
   "framework": null,
   "builds": [
     {
-      "src": "auth-server.js",
+      "src": "auth-service/index.js",
       "use": "@vercel/node",
       "config": {
         "maxDuration": 10
@@ -13,7 +13,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "auth-server.js"
+      "dest": "auth-service/index.js"
     }
   ],
   "env": {

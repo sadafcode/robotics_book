@@ -1,5 +1,6 @@
 # Dependencies
 /node_modules
+/auth-service/node_modules
 /.pnp
 .pnp.js
 
@@ -45,3 +46,4 @@ nul
 
 # Build artifacts in docs
 docs/**/*.html
+.vercel
