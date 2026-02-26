@@ -46,7 +46,11 @@ app.get("/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
-app.listen(port, () => {
-  console.log(`Auth server running on http://localhost:${port}`);
-  console.log(`Health check: http://localhost:${port}/health`);
-});
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`Auth server running on http://localhost:${port}`);
+    console.log(`Health check: http://localhost:${port}/health`);
+  });
+}
+
+module.exports = app;
