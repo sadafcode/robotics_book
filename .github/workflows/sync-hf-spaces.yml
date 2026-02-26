@@ -19,5 +19,5 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git remote add space https://sadafcode:$HF_TOKEN@huggingface.co/spaces/sadafcode/physical-ai-backend
+          git remote add space https://Sadafawad:$HF_TOKEN@huggingface.co/spaces/Sadafawad/physical-ai-backend
           git push space HEAD:main --force
