@@ -1,3 +1,12 @@
+---
+title: Physical AI Backend
+emoji: 🤖
+colorFrom: blue
+colorTo: purple
+sdk: docker
+pinned: false
+---
+
 # Physical AI & Humanoid Robotics Book
 
 An interactive educational platform for learning Physical AI and Humanoid Robotics. Built with Docusaurus for the book content, a FastAPI RAG chatbot backend, and JWT authentication.
