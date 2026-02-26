@@ -1,24 +1,11 @@
 {
   "version": 2,
-  "framework": null,
-  "builds": [
-    {
-      "src": "auth-service/index.js",
-      "use": "@vercel/node",
-      "config": {
-        "maxDuration": 10,
-        "includeFiles": ["auth-service/**"]
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "auth-service/index.js"
-    }
-  ],
+  "buildCommand": "cd auth-service && npm install",
   "installCommand": "cd auth-service && npm install",
-  "env": {
-    "NODE_ENV": "production"
-  }
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/auth-service"
+    }
+  ]
 }
