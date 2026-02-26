@@ -6,7 +6,8 @@
       "src": "auth-service/index.js",
       "use": "@vercel/node",
       "config": {
-        "maxDuration": 10
+        "maxDuration": 10,
+        "includeFiles": ["auth-service/**"]
       }
     }
   ],
@@ -16,6 +17,7 @@
       "dest": "auth-service/index.js"
     }
   ],
+  "installCommand": "cd auth-service && npm install",
   "env": {
     "NODE_ENV": "production"
   }
