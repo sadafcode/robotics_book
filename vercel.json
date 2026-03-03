@@ -1,11 +1,15 @@
 {
   "version": 2,
-  "buildCommand": "cd auth-service && npm install",
-  "installCommand": "cd auth-service && npm install",
-  "rewrites": [
+  "builds": [
     {
-      "source": "/(.*)",
-      "destination": "/auth-service"
+      "src": "auth-service/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "auth-service/index.js"
     }
   ]
 }
