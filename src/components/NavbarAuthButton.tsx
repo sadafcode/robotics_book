@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAuth } from './AuthProvider';
+import { clearAuthToken } from '../auth/client';
 
 export default function NavbarAuthButton() {
   const { user, isLoading, signOut } = useAuth();
@@ -12,6 +13,7 @@ export default function NavbarAuthButton() {
         <span style={{ fontSize: '14px' }}>{user.name || user.email}</span>
         <button
           onClick={async () => {
+            clearAuthToken();
             await signOut();
             window.location.href = '/robotics_book/';
           }}

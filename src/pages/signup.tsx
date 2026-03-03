@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Layout from '@theme/Layout';
 import { useAuth } from '../components/AuthProvider';
+import { saveAuthToken } from '../auth/client';
 
 const SignupPage = () => {
   const { user, signUp } = useAuth();
@@ -35,17 +36,14 @@ const SignupPage = () => {
       name,
       email,
       password,
-      callbackURL: '/robotics_book/questionnaire',
-      fetchOptions: {
-        onSuccess: () => {
-          window.location.href = '/robotics_book/questionnaire';
-        },
-      },
     });
 
     if (signUpError) {
       setError(signUpError.message || 'Signup failed. Please try again.');
       setLoading(false);
+    } else {
+      if (data?.token) saveAuthToken(data.token);
+      window.location.href = '/robotics_book/questionnaire';
     }
   };
 

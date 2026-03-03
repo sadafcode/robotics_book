@@ -4,6 +4,7 @@ import cors from "cors";
 import pkg from "pg";
 const { Pool } = pkg;
 import { betterAuth } from "better-auth";
+import { bearer } from "better-auth/plugins";
 import { toNodeHandler } from "better-auth/node";
 
 const pool = new Pool({ connectionString: process.env.NEON_DATABASE_URL });
@@ -18,6 +19,7 @@ const auth = betterAuth({
     requireEmailVerification: false,
     minPasswordLength: 8,
   },
+  plugins: [bearer()],
   advanced: {
     cookies: {
       session_token: {

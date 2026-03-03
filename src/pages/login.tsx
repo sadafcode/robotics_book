@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Layout from '@theme/Layout';
 import { useAuth } from '../components/AuthProvider';
+import { saveAuthToken } from '../auth/client';
 
 const LoginPage = () => {
   const { user, signIn } = useAuth();
@@ -30,7 +31,7 @@ const LoginPage = () => {
     setError('');
     setLoading(true);
 
-    const { error: signInError } = await signIn.email({
+    const { error: signInError, data } = await signIn.email({
       email,
       password,
     });
@@ -39,6 +40,7 @@ const LoginPage = () => {
       setError(signInError.message || 'Login failed. Please check your credentials.');
       setLoading(false);
     } else {
+      if (data?.token) saveAuthToken(data.token);
       window.location.href = '/robotics_book/';
     }
   };
