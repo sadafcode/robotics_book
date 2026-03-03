@@ -4,11 +4,16 @@
  */
 
 .heroBanner {
-  padding: 4rem 0;
+  padding: 6rem 0;
   position: relative;
   overflow: hidden;
   background-color: var(--ai-dark-navy);
+  background-image: url('/img/ai_theme_background.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
   color: var(--ai-soft-white);
+  min-height: 100vh;
 }
 
 .heroContent {
@@ -30,7 +35,7 @@
 
 .heroOverlay {
   position: absolute;
-  top: 50%;
+  top: 65%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;

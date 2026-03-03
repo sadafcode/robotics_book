@@ -14,7 +14,6 @@ function HomepageHeader() {
       <div className="container">
         <div className={styles.heroContent}>
           <div className={styles.heroImageContainer}>
-            <img src="/img/img.png" alt="Physical AI & Humanoid Robotics" className={styles.heroImage} />
             <div className={styles.heroOverlay}>
               <Heading as="h1" className="hero__title">
                 {siteConfig.title}

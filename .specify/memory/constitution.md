@@ -43,15 +43,20 @@ Rationale for v1.0.0:
 - BookGenerationSubAgent: Docusaurus setup, sidebar config, GitHub Pages deployment
 - ResearchWriterSubAgent: Web research, content synthesis, ROS 2 examples, URDF snippets
 
+    - RAGChatbotSubAgent: RAG pipeline operations (chunking, embedding, retrieval, answering)
+    - PersonalizationSubAgent: Content personalization based on user background and expertise level
+
 **Rationale**: Specialized agents produce higher-quality outputs in their domains. Orchestration ensures consistent workflows while preventing scope overlap and maintaining separation of concerns.
 
 ### II. Skills-First Architecture (NON-NEGOTIABLE)
 
 **Reusable Skills Required**: ALL common operations MUST be implemented as reusable skills in `.claude/skills/`. Direct implementation without skill extraction is prohibited after the skill has been used twice.
 
-**Minimum 12 Skills**: The project MUST maintain at least 12 skills across agents:
+**Minimum 24 Skills**: The project MUST maintain at least 24 skills across agents:
 - BookGenerationSubAgent: `init_docusaurus_project`, `create_chapter_file`, `generate_sidebar_config`, `deploy_to_github_pages`, `add_module_structure`
 - ResearchWriterSubAgent: `web_search_topic`, `synthesize_content`, `generate_ros2_example`, `generate_urdf_snippet`, `create_diagram`, `add_learning_objectives`, `create_quiz_section`
+- RAGChatbotSubAgent: `chunk_chapter_content`, `embed_chunks`, `semantic_search`, `generate_answer`, `explain_selected_text`, `generate_chapter_summary`, `cite_sources`
+- AuthSubAgent: `betterauth-jwt-setup`, `user-background-collection`, `personalization-level-definition`, `jwt-token-management`, `user-profile-storage`
 
 **Skill Structure**: Each skill MUST include:
 - YAML frontmatter with description
@@ -198,9 +203,8 @@ Rationale for v1.0.0:
 - Alembic for migrations
 
 **AI Services**:
-- OpenAI API (GPT-4, GPT-4 Turbo for content generation)
-- Anthropic Claude (for research synthesis)
-- Embedding models for semantic search
+- Google Gemini API (for content generation)
+- Hugging Face Sentence Transformers (for semantic search embeddings)
 
 **Vector Database**: Qdrant
 - Store document embeddings
@@ -280,6 +284,14 @@ The master agent MUST NOT:
 - Learning objectives (Bloom's Taxonomy)
 - Quiz/assessment question generation
 
+**PersonalizationSubAgent** handles:
+- User background analysis and expertise classification
+- Content complexity adjustment based on user level
+- Personalized learning path generation
+- Adaptive content delivery based on user progress
+- Hardware and setup recommendations tailored to expertise
+- Progress tracking and personalization updates
+
 ### Communication Protocol
 
 **Task Delegation Format**:
@@ -342,6 +354,21 @@ Context: Initialize Docusaurus site for Physical AI book with 10 chapters
 5. `create_diagram` - Generate Mermaid/architecture diagrams
 6. `add_learning_objectives` - Add Bloom's Taxonomy objectives
 7. `create_quiz_section` - Generate assessment questions
+
+**AuthSubAgent (6 skills)**:
+1. `betterauth-jwt-setup` - Initialize BetterAuth with JWT configuration
+2. `user-background-collection` - Collect user's technical background during registration
+3. `personalization-level-definition` - Define user's expertise level for content adaptation
+4. `jwt-token-management` - Handle JWT token generation, validation, and refresh
+5. `user-profile-storage` - Store and manage user profile with background information
+6. `betterauth-jwt` - Complete BetterAuth JWT authentication implementation with user background collection
+
+**PersonalizationSubAgent (5 skills)**:
+1. `user-personalization-analysis` - Analyze user background and classify expertise level
+2. `content-adaptation-engine` - Adjust content complexity based on user level
+3. `learning-path-generator` - Generate personalized learning paths based on user goals
+4. `progressive-content-delivery` - Deliver content adapted to user's technical background
+5. `chapter-personalization-control` - Provide manual personalization controls for individual chapters
 
 ### Skill Invocation
 

@@ -9,6 +9,11 @@ const config: Config = {
   tagline: 'Master robotics from sensors to intelligent systems',
   favicon: 'img/favicon.ico',
 
+  // Custom fields for runtime configuration
+  customFields: {
+    apiUrl: process.env.REACT_APP_API_URL || 'http://localhost:8000',
+  },
+
   // Set the production url of your site here
   url: 'https://sadafcode.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
@@ -81,6 +86,10 @@ const config: Config = {
         {
           href: 'https://github.com/sadafcode/robotics_book',
           label: 'GitHub',
+          position: 'right',
+        },
+        {
+          type: 'custom-authButton',
           position: 'right',
         },
       ],

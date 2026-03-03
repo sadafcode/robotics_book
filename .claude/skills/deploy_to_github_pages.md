@@ -90,6 +90,11 @@ Present two options to the user:
 - Consistent deployment environment
 - Easy to maintain
 
+**Important Configuration:**
+- Ensure GitHub Actions workflow triggers on the correct branch (main, master, or gh-pages)
+- Verify repository is public for public GitHub Pages access
+- Check that the workflow file is properly configured for your default branch
+
 #### Option B: Manual Deployment (Docusaurus CLI)
 
 **Advantages:**
@@ -260,6 +265,7 @@ Wait 2-5 minutes for GitHub Pages to deploy, then:
 - Go to repository → Actions tab
 - Verify workflow ran successfully (if using Actions)
 - Or check Settings → Pages for deployment URL
+- Ensure repository is set to "Public" for GitHub Pages access
 
 **Test the deployed site:**
 
@@ -272,6 +278,7 @@ Check:
 - [ ] Images and assets load
 - [ ] Links are not broken
 - [ ] Base URL is correct (no 404s)
+- [ ] Repository is public (for public access)
 
 ### Step 7: Set Up Custom Domain (Optional)
 
@@ -388,12 +395,15 @@ Present results in this format:
 - Verify GitHub Pages is enabled in repository settings
 - Ensure `gh-pages` branch exists and contains build output
 - Check URL format: `https://username.github.io/repo-name/` (trailing slash)
+- Verify GitHub Actions workflow triggers on the correct branch (main, master, or gh-pages)
+- Ensure repository is set to "Public" for public access
 
 **If GitHub Actions workflow fails:**
 - Check Actions tab for specific error messages
 - Verify Node.js version in workflow matches local version
 - Ensure `npm ci` can install all dependencies
 - Check build logs for missing files or broken links
+- Verify the workflow triggers on the correct branch (not just 'main' or 'master')
 
 **If assets (images, CSS) don't load:**
 - Verify `baseUrl` is set correctly
@@ -412,6 +422,13 @@ Present results in this format:
 - Check if `gh-pages` branch has latest build
 - Try hard refresh in browser (Ctrl+Shift+R or Cmd+Shift+R)
 - Wait a few minutes for GitHub CDN to update
+
+**If site still shows 404 after successful build:**
+- Go to repository Settings → Pages
+- Temporarily change source to another branch, save
+- Change back to the correct branch (gh-pages) with correct directory (/ root), save
+- This forces GitHub Pages to refresh configuration
+- Wait 5-10 minutes for changes to propagate
 
 ## ERROR HANDLING
 
@@ -437,7 +454,9 @@ git config --global user.email "your.email@example.com"
 Before completing:
 - [ ] `docusaurus.config.js` has correct GitHub Pages settings
 - [ ] Repository is connected to GitHub remote
+- [ ] Repository is set to "Public" (required for public GitHub Pages access)
 - [ ] Deployment workflow/command is set up
+- [ ] GitHub Actions workflow triggers on correct branch (main, master, or gh-pages)
 - [ ] `npm run build` completes without errors
 - [ ] GitHub Pages is enabled in repository settings
 - [ ] Live site is accessible at expected URL
