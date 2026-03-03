@@ -76,7 +76,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ onClose }) => {
     setError(null);
 
     try {
-      const response = await fetch('https://sadafcode-physical-ai-backend.hf.space/api/v1/chat/completions', {
+      const response = await fetch('https://sadafawad-physical-ai-backend.hf.space/api/v1/chat/completions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

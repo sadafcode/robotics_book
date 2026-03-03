@@ -2,7 +2,7 @@
  * Translation Service for Urdu translations via OpenAI GPT-4o-mini
  */
 
-const API_BASE_URL = 'https://sadafcode-physical-ai-backend.hf.space';
+const API_BASE_URL = 'https://sadafawad-physical-ai-backend.hf.space';
 
 export interface TranslationRequest {
   text: string;

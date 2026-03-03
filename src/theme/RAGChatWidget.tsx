@@ -10,7 +10,7 @@ interface Message {
 
 const BACKEND_URL = typeof window !== "undefined" && window.location.hostname === "localhost"
   ? "http://localhost:8000"
-  : "https://sadafcode-physical-ai-backend.hf.space";
+  : "https://sadafawad-physical-ai-backend.hf.space";
 
 const RAGChatWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
