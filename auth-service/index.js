@@ -18,6 +18,16 @@ const auth = betterAuth({
     requireEmailVerification: false,
     minPasswordLength: 8,
   },
+  advanced: {
+    cookies: {
+      session_token: {
+        attributes: {
+          sameSite: "none",
+          secure: true,
+        },
+      },
+    },
+  },
 });
 
 const app = express();
