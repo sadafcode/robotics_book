@@ -244,8 +244,20 @@ backend/
 ```
 
 ### Authentication (Feature: 003-auth-jwt)
-- **BetterAuth**: JWT-based auth with signup/login
-- **Auth Server**: `auth-server.js` on port 3001
+- **BetterAuth v1.4+**: Email/password auth with signup/login
+- **Auth Server**: `auth-service/index.js` — Express + BetterAuth, deployed on Vercel
+- **Production URL**: `https://physical-ai-auth-three.vercel.app`
+- **Plugins**: `bearer()` — accepts `Authorization: Bearer <token>` header for cross-origin auth
+- **Session Strategy**: Bearer token stored in `localStorage` (key: `ba_token`) — avoids third-party cookie blocking between `github.io` and `vercel.app`
+- **Token Flow**: Login/signup → save `data.token` to localStorage → every request sends `Authorization: Bearer <token>` via `fetchOptions.onRequest` in auth client
+- **Key Files**:
+  - `auth-service/index.js` — BetterAuth server with bearer plugin + SameSite=None cookies
+  - `src/auth/client.ts` — `createAuthClient` with `onRequest` hook for Bearer token injection, `saveAuthToken`/`clearAuthToken`/`getAuthToken` helpers
+  - `src/pages/login.tsx` — saves token after successful sign-in
+  - `src/pages/signup.tsx` — saves token after successful sign-up
+  - `src/components/NavbarAuthButton.tsx` — clears token on logout
+  - `src/components/AuthProvider.tsx` — wraps `authClient.useSession()`
+- **Deploy**: `npx vercel --prod --yes` (GitHub push does NOT auto-deploy auth-service)
 
 ### Deployment & CI/CD
 - **Hosting**: GitHub Pages (static site)
