@@ -127,7 +127,8 @@ const TranslationWrapper: React.FC<TranslationWrapperProps> = ({ chapterId, chil
     if (!html) return;
 
     setIsTranslating(true);
-    translateHtmlString(html)
+    loadPrebuiltTranslations()
+      .then(() => translateHtmlString(html))
       .then(setTranslatedHtml)
       .catch(console.error)
       .finally(() => setIsTranslating(false));
