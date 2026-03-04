@@ -6,7 +6,7 @@ from fastapi import Depends, HTTPException, Request
 
 from config import settings
 
-# Simple in-memory session cache: cookie_str -> (user_dict, expire_ts)
+# Simple in-memory session cache: cache_key -> (user_dict, expire_ts)
 _session_cache: dict[str, tuple[dict, float]] = {}
 _CACHE_TTL = 30.0  # seconds
 
@@ -20,23 +20,32 @@ async def get_current_user(
     request: Request,
     http_client: httpx.AsyncClient = Depends(_get_http_client),
 ) -> dict[str, Any]:
-    """Validate session by proxying cookies to the BetterAuth server.
+    """Validate session by proxying Bearer token or cookies to the BetterAuth server.
 
     Raises 401 if no valid session is found.
     """
+    # Prefer Authorization: Bearer <token> (works cross-origin without cookies)
+    auth_header = request.headers.get("authorization", "")
     cookie_header = request.headers.get("cookie", "")
+    cache_key = auth_header or cookie_header
 
     # Check cache first
-    cached = _session_cache.get(cookie_header)
+    cached = _session_cache.get(cache_key)
     if cached:
         user_data, expires_at = cached
         if time.monotonic() < expires_at:
             return user_data
 
+    forward_headers: dict[str, str] = {}
+    if auth_header:
+        forward_headers["authorization"] = auth_header
+    else:
+        forward_headers["cookie"] = cookie_header
+
     try:
         response = await http_client.get(
             f"{settings.AUTH_SERVER_URL}/api/auth/get-session",
-            headers={"cookie": cookie_header},
+            headers=forward_headers,
         )
     except httpx.RequestError:
         raise HTTPException(status_code=503, detail="Auth server unavailable")
@@ -51,7 +60,7 @@ async def get_current_user(
     user = data["user"]
 
     # Store in cache
-    _session_cache[cookie_header] = (user, time.monotonic() + _CACHE_TTL)
+    _session_cache[cache_key] = (user, time.monotonic() + _CACHE_TTL)
 
     return user
 

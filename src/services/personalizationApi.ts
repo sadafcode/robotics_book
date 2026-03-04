@@ -1,8 +1,12 @@
 const BASE = 'https://sadafawad-physical-ai-backend.hf.space/api/v1/personalization';
 
 function headers(userId?: string): HeadersInit {
-  const h: HeadersInit = { 'Content-Type': 'application/json' };
-  if (userId) (h as Record<string, string>)['X-User-Id'] = userId;
+  const h: Record<string, string> = { 'Content-Type': 'application/json' };
+  if (userId) h['X-User-Id'] = userId;
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('ba_token');
+    if (token) h['Authorization'] = `Bearer ${token}`;
+  }
   return h;
 }
 
