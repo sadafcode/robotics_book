@@ -1,4 +1,4 @@
-const BASE = 'https://physical-ai-backend.onrender.com/api/v1/personalization';
+const BASE = 'https://sadafawad-physical-ai-backend.hf.space/api/v1/personalization';
 
 function headers(userId?: string): HeadersInit {
   const h: HeadersInit = { 'Content-Type': 'application/json' };
