@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     DATABASE_URL: str
 
     # Auth server
-    AUTH_SERVER_URL: str = "http://localhost:3001"
+    AUTH_SERVER_URL: str = "https://physical-ai-auth-three.vercel.app"
 
     # Defaults
     EMBEDDING_MODEL: str = "text-embedding-3-small"
