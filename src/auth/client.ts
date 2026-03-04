@@ -25,10 +25,7 @@ export const authClient = typeof window !== "undefined"
         onRequest: (ctx) => {
           const token = getAuthToken();
           if (token) {
-            ctx.options.headers = {
-              ...ctx.options.headers,
-              Authorization: `Bearer ${token}`,
-            };
+            ctx.headers.set("Authorization", `Bearer ${token}`);
           }
         },
       },
