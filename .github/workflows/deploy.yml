@@ -31,6 +31,11 @@ jobs:
       - name: Build website
         run: npm run build
 
+      - name: Pre-compute Urdu translations
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: node scripts/precompute-translations.mjs
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

@@ -22,6 +22,26 @@ function getCacheKey(text: string, targetLang: string): string {
   return `${targetLang}:${text.slice(0, 100)}`;
 }
 
+// Load pre-built translations (generated at build time) into the cache
+let _prebuiltPromise: Promise<void> | null = null;
+
+export function loadPrebuiltTranslations(): Promise<void> {
+  if (_prebuiltPromise) return _prebuiltPromise;
+  _prebuiltPromise = (async () => {
+    try {
+      const res = await fetch('/robotics_book/translations-ur.json');
+      if (!res.ok) return;
+      const data: Record<string, string> = await res.json();
+      for (const [key, value] of Object.entries(data)) {
+        translationCache.set(key, value);
+      }
+    } catch {
+      // silently ignore — runtime translation will be used as fallback
+    }
+  })();
+  return _prebuiltPromise;
+}
+
 /**
  * Check if translation service is available
  */

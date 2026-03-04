@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useTranslation } from '../context/TranslationContext';
 import UrduTranslationButton from './UrduTranslationButton';
-import { translateTexts } from '../services/translationService';
+import { translateTexts, loadPrebuiltTranslations } from '../services/translationService';
 
 interface TranslationWrapperProps {
   chapterId?: string;
@@ -100,6 +100,9 @@ const TranslationWrapper: React.FC<TranslationWrapperProps> = ({ chapterId, chil
 
   const [translatedHtml, setTranslatedHtml] = useState<string | null>(null);
   const [isTranslating, setIsTranslating] = useState(false);
+
+  // Pre-load build-time translations into cache as soon as component mounts
+  useEffect(() => { loadPrebuiltTranslations(); }, []);
 
   // Capture original HTML every render (only stores once — when ref is first set)
   useEffect(() => {
