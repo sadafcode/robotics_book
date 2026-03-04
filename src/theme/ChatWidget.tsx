@@ -76,6 +76,8 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ onClose }) => {
     setError(null);
 
     try {
+      const history = messages.map(m => ({ role: m.role, content: m.content }));
+
       const response = await fetch('https://sadafawad-physical-ai-backend.hf.space/api/v1/chat/completions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -83,6 +85,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ onClose }) => {
           message: inputValue,
           selected_text: selectedText,
           session_id: 'docusaurus-session',
+          history,
         }),
       });
 

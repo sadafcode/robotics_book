@@ -4,16 +4,21 @@ from config import settings
 _client = OpenAI(api_key=settings.OPENAI_API_KEY)
 
 SYSTEM_PROMPT = """You are an expert assistant for the "Physical AI & Humanoid Robotics" book.
-Answer questions using ONLY the provided context from the book.
-If the context doesn't contain enough information, say so honestly.
-Always cite which chapter/section your answer comes from.
-Keep answers concise but thorough. Use markdown formatting."""
+
+Rules:
+- ALWAYS answer directly using the provided context. Never ask the user to clarify unless the context is completely empty.
+- If the query is vague (e.g. "explain", "tell me more"), summarize the most relevant content from ALL provided context chunks.
+- If multiple topics are in the context, give a brief overview of each — do not ask the user to pick one.
+- Only say "I don't have information on that" if the context truly contains nothing relevant.
+- Always cite which chapter/section your answer comes from.
+- Keep answers concise but thorough. Use markdown formatting."""
 
 
 def generate_response(
     query: str,
     retrieved_chunks: list[dict],
     selected_text: str | None = None,
+    history: list[dict] | None = None,
 ) -> tuple[str, list[dict]]:
     """Generate a RAG response using GPT-4o.
 
@@ -35,13 +40,18 @@ def generate_response(
 
     context = "\n".join(context_parts)
 
-    messages = [
-        {"role": "system", "content": SYSTEM_PROMPT},
-        {
-            "role": "user",
-            "content": f"Context:\n{context}\n\nQuestion: {query}",
-        },
-    ]
+    messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+
+    # Inject prior conversation turns (last 10 messages max)
+    if history:
+        for turn in history[-10:]:
+            if turn.get("role") in ("user", "assistant") and turn.get("content"):
+                messages.append({"role": turn["role"], "content": turn["content"]})
+
+    messages.append({
+        "role": "user",
+        "content": f"Context:\n{context}\n\nQuestion: {query}",
+    })
 
     resp = _client.chat.completions.create(
         model=settings.CHAT_MODEL,

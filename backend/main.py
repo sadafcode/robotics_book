@@ -38,10 +38,16 @@ app.add_middleware(
 app.include_router(personalization_router)
 
 
+class HistoryMessage(BaseModel):
+    role: str
+    content: str
+
+
 class ChatRequest(BaseModel):
     message: str
     selected_text: str | None = None
     session_id: str = "default"
+    history: list[HistoryMessage] = []
 
 
 class SourceResponse(BaseModel):
@@ -127,6 +133,7 @@ async def chat_completions(
         query=req.message,
         retrieved_chunks=hits,
         selected_text=req.selected_text,
+        history=[{"role": h.role, "content": h.content} for h in req.history],
     )
 
     # 4. Log to database
